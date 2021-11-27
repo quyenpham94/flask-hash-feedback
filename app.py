@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect, session, flash
 from models import connect_db, db, User, Feedback
 
-from forms import RegisterForm, LoginForm, FeedbackForm
+from forms import RegisterForm, LoginForm, FeedbackForm, DeleteForm
 from werkzeug.exceptions import Unauthorized
 
 
