@@ -42,7 +42,7 @@ def register_page():
 
         session['username'] = user.username
 
-        return redirect(f"users/{user.username}")
+        return redirect(f"/users/{user.username}")
     
     else:
         return render_template("users/register.html", form=form)
@@ -52,9 +52,10 @@ def login_page():
     """Login page that allows existing user sign in."""
 
     if "username" in session:
-        return redirect(f"users/{session['username']}")
+        return redirect(f"/users/{session['username']}")
 
     form = LoginForm()
+
     if form.validate_on_submit():
         username = form.username.data
         password = form.password.data
@@ -62,7 +63,7 @@ def login_page():
         user = User.authenticate(username, password)
         if user:
             session['username'] = user.username
-            return redirect(f"users/{user.username}")
+            return redirect(f"/users/{user.username}")
         else:
             form.username.errors = ["Invalid username/password."]
             return render_template("users/login.html", form=form) 
@@ -118,7 +119,7 @@ def new_feedback(username):
         db.session.add(feedback)
         db.session.commit()
 
-        return redirect(f"users/{feedback.username}")
+        return redirect(f"/users/{feedback.username}")
     
     else:
         return render_template("feedback/new.html", form=form)
@@ -140,7 +141,7 @@ def update_feedback(feedback_id):
 
         db.session.commit()
 
-        return redirect(f"users/{feedback.username}")
+        return redirect(f"/users/{feedback.username}")
     return render_template("/feedback/edit.html", form=form, feedback=feedback)
 
 @app.route("/feedback/<int:feedback_id>/delete", methods=["POST"])
